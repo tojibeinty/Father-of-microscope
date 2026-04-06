@@ -39,14 +39,34 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .nav-link{padding:6px 11px;border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;color:var(--gray);transition:all 0.3s;border:none;background:transparent;font-family:'Tajawal',sans-serif;}
 .nav-link:hover,.nav-link.active{color:var(--gold-light);background:rgba(201,168,76,0.08);}
 
-/* ===== BOTTOM TAB BAR (Mobile) ===== */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:1000;background:rgba(5,12,24,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(201,168,76,0.12);padding-bottom:var(--safe-bottom);}
-.bottom-nav-inner{display:grid;grid-template-columns:repeat(6,1fr);height:58px;}
-.bnav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all 0.2s;border:none;background:transparent;color:var(--gray);font-family:'Tajawal',sans-serif;padding:0;}
-.bnav-item.active{color:var(--gold-light);}
-.bnav-icon{font-size:20px;line-height:1;}
-.bnav-label{font-size:9px;font-weight:700;}
-.bnav-item.active .bnav-icon{filter:drop-shadow(0 0 6px rgba(201,168,76,0.5));}
+/* ===== HAMBURGER + DRAWER (Mobile) ===== */
+.bottom-nav{display:none;}
+.hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:40px;height:40px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:10px;cursor:pointer;transition:all 0.2s;}
+.hamburger span{display:block;width:20px;height:2px;background:var(--gold-light);border-radius:2px;transition:all 0.3s;}
+.hamburger:hover{background:rgba(201,168,76,0.15);}
+
+/* Drawer overlay */
+#drawerOverlay{display:none;position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);}
+#drawerOverlay.open{display:block;}
+
+/* Drawer */
+#drawer{position:fixed;top:0;right:0;bottom:0;width:75%;max-width:280px;z-index:1200;background:linear-gradient(180deg,var(--navy2),var(--deep));border-left:1px solid rgba(201,168,76,0.15);transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);padding:0;overflow-y:auto;}
+#drawer.open{transform:translateX(0);}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.drawer-logo{display:flex;align-items:center;gap:10px;}
+.drawer-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--teal));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.drawer-logo-text{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-light);line-height:1.3;}
+.drawer-logo-sub{font-size:9px;color:var(--gray);display:block;margin-top:1px;}
+.drawer-close{width:32px;height:32px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--gray);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.drawer-close:hover{background:rgba(224,82,82,0.15);color:var(--danger);}
+.drawer-nav{padding:12px 0;}
+.drawer-item{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;transition:all 0.2s;border:none;background:transparent;width:100%;text-align:right;color:var(--gray);font-family:'Tajawal',sans-serif;font-size:14px;font-weight:600;position:relative;}
+.drawer-item:hover{background:rgba(201,168,76,0.06);color:var(--white);}
+.drawer-item.active{color:var(--gold-light);background:rgba(201,168,76,0.08);}
+.drawer-item.active::before{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:2px 0 0 2px;}
+.drawer-item-icon{font-size:20px;width:28px;text-align:center;flex-shrink:0;}
+.drawer-item-label{flex:1;text-align:right;}
+.drawer-divider{height:1px;background:rgba(255,255,255,0.06);margin:8px 20px;}
 
 /* ===== PAGES ===== */
 .page{display:none;position:relative;z-index:1;padding-top:60px;min-height:100vh;}
@@ -360,8 +380,8 @@ footer span{color:var(--gold-light);}
 /* ===== RESPONSIVE ===== */
 @media(max-width:699px){
   .nav-links{display:none;}
-  .bottom-nav{display:block;}
-  .page{padding-bottom:58px;}
+  .hamburger{display:flex;}
+  .page{padding-bottom:20px;}
 }
 @media(min-width:700px){
   nav{height:66px;padding:0 30px;}
@@ -382,6 +402,9 @@ footer span{color:var(--gold-light);}
     <div class="nav-logo-icon">🔬</div>
     <div><h1>Father of Microscope</h1><span>قسم المختبرات الطبية</span></div>
   </div>
+  <button class="hamburger" onclick="openDrawer()" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-links">
     <button class="nav-link active" onclick="go('heroPage')">🏠 الرئيسية</button>
     <button class="nav-link" onclick="go('teamPage')">👥 الأعضاء</button>
@@ -392,17 +415,49 @@ footer span{color:var(--gold-light);}
   </div>
 </nav>
 
-<!-- MOBILE BOTTOM TAB BAR -->
-<nav class="bottom-nav">
-  <div class="bottom-nav-inner">
-    <button class="bnav-item active" onclick="go('heroPage')"><span class="bnav-icon">🏠</span><span class="bnav-label">الرئيسية</span></button>
-    <button class="bnav-item" onclick="go('teamPage')"><span class="bnav-icon">👥</span><span class="bnav-label">الأعضاء</span></button>
-    <button class="bnav-item" onclick="go('casesPage')"><span class="bnav-icon">🧫</span><span class="bnav-label">الكيسات</span></button>
-    <button class="bnav-item" onclick="go('calcsPage')"><span class="bnav-icon">🧮</span><span class="bnav-label">الحاسبات</span></button>
-    <button class="bnav-item" onclick="go('videosPage')"><span class="bnav-icon">🎬</span><span class="bnav-label">الفيديوهات</span></button>
-    <button class="bnav-item" onclick="go('coursesPage')"><span class="bnav-icon">🎓</span><span class="bnav-label">الدورات</span></button>
+<!-- DRAWER OVERLAY -->
+<div id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<!-- SIDE DRAWER -->
+<div id="drawer">
+  <div class="drawer-header">
+    <div class="drawer-logo">
+      <div class="drawer-logo-icon">🔬</div>
+      <div>
+        <div class="drawer-logo-text">Father of Microscope</div>
+        <span class="drawer-logo-sub">قسم المختبرات الطبية</span>
+      </div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
   </div>
-</nav>
+  <div class="drawer-nav">
+    <button class="drawer-item active" id="di-heroPage" onclick="goDrawer('heroPage')">
+      <span class="drawer-item-icon">🏠</span>
+      <span class="drawer-item-label">الرئيسية</span>
+    </button>
+    <button class="drawer-item" id="di-teamPage" onclick="goDrawer('teamPage')">
+      <span class="drawer-item-icon">👥</span>
+      <span class="drawer-item-label">الأعضاء</span>
+    </button>
+    <button class="drawer-item" id="di-casesPage" onclick="goDrawer('casesPage')">
+      <span class="drawer-item-icon">🧫</span>
+      <span class="drawer-item-label">الكيسات</span>
+    </button>
+    <button class="drawer-item" id="di-calcsPage" onclick="goDrawer('calcsPage')">
+      <span class="drawer-item-icon">🧮</span>
+      <span class="drawer-item-label">الحاسبات</span>
+    </button>
+    <div class="drawer-divider"></div>
+    <button class="drawer-item" id="di-videosPage" onclick="goDrawer('videosPage')">
+      <span class="drawer-item-icon">🎬</span>
+      <span class="drawer-item-label">الفيديوهات</span>
+    </button>
+    <button class="drawer-item" id="di-coursesPage" onclick="goDrawer('coursesPage')">
+      <span class="drawer-item-icon">🎓</span>
+      <span class="drawer-item-label">الدورات</span>
+    </button>
+  </div>
+</div>
 
 <!-- HERO -->
 <div id="heroPage" class="page active">
@@ -798,9 +853,24 @@ const PAGES=['heroPage','teamPage','casesPage','calcsPage','videosPage','courses
 function go(id){
   PAGES.forEach(p=>document.getElementById(p).classList.toggle('active',p===id));
   document.querySelectorAll('.nav-link').forEach((b,i)=>b.classList.toggle('active',PAGES[i]===id));
-  document.querySelectorAll('.bnav-item').forEach((b,i)=>b.classList.toggle('active',PAGES[i]===id));
+  // Update drawer active state
+  PAGES.forEach(p=>{const el=document.getElementById('di-'+p);if(el)el.classList.toggle('active',p===id);});
   window.scrollTo(0,0);
   updStats();
+}
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function goDrawer(id){
+  go(id);
+  closeDrawer();
 }
 
 // ======================== ADMIN ========================
