@@ -68,9 +68,9 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .hero-title{font-family:'Cinzel',serif;font-size:clamp(28px,8vw,76px);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--white) 0%,var(--gold-light) 50%,var(--teal-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:14px;color:var(--gray);margin:14px auto 0;max-width:500px;line-height:1.8;}
-.hero-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:36px;max-width:480px;margin-inline:auto;}
-@media(min-width:500px){.hero-cards{grid-template-columns:repeat(6,1fr);max-width:none;}}
-.hcard{background:rgba(10,30,53,0.7);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:16px 10px;text-align:center;cursor:pointer;transition:all 0.4s;}
+.hero-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:36px;max-width:360px;margin-inline:auto;}
+@media(min-width:500px){.hero-cards{grid-template-columns:repeat(5,1fr);max-width:none;max-width:600px;}}
+.hcard{background:rgba(10,30,53,0.7);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:18px 10px;text-align:center;cursor:pointer;transition:all 0.4s;}
 .hcard:active{transform:scale(0.96);}
 @media(min-width:700px){.hcard:hover{transform:translateY(-5px);border-color:rgba(201,168,76,0.35);box-shadow:0 12px 32px rgba(0,0,0,0.5);}}
 .hcard-icon{font-size:24px;margin-bottom:7px;}
@@ -417,7 +417,7 @@ footer span{color:var(--gold-light);}
         <div class="hcard" onclick="go('calcsPage')"><div class="hcard-icon">🧮</div><div class="hcard-num" id="st3">0</div><div class="hcard-label">حاسبات</div></div>
         <div class="hcard" onclick="go('videosPage')"><div class="hcard-icon">🎬</div><div class="hcard-num" id="st4">0</div><div class="hcard-label">فيديوهات</div></div>
         <div class="hcard" onclick="go('coursesPage')"><div class="hcard-icon">🎓</div><div class="hcard-num" id="st5">0</div><div class="hcard-label">دورات</div></div>
-        <div class="hcard" onclick="secret2()"><div class="hcard-icon">⚙️</div><div class="hcard-num" style="font-size:14px;margin-top:4px;">إدارة</div><div class="hcard-label">للمشرف</div></div>
+
       </div>
     </div>
   </div>
