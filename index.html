@@ -8,7 +8,7 @@
 <style>
 :root{--gold:#C9A84C;--gold-light:#E8C97A;--deep:#050C18;--navy:#071525;--navy2:#0A1E35;--teal:#0D7E9A;--teal-light:#14B8D4;--white:#F0F4F8;--gray:#8AA0B4;--danger:#E05252;--success:#2ECC8F;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;overflow-x:hidden;}
+body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;}
 .bg-grid{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(13,126,154,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(13,126,154,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
 .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
 .orb1{width:600px;height:600px;background:rgba(13,126,154,0.1);top:-150px;right:-150px;}
@@ -21,8 +21,9 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .nav-links{display:flex;gap:4px;}
 .nav-link{padding:7px 13px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:var(--gray);transition:all 0.3s;border:none;background:transparent;font-family:'Tajawal',sans-serif;}
 .nav-link:hover,.nav-link.active{color:var(--gold-light);background:rgba(201,168,76,0.08);}
-.page{display:none;position:relative;z-index:1;}
-.page.active{display:block;}
+#mainWrap{flex:1;display:flex;flex-direction:column;}
+.page{display:none;position:relative;z-index:1;flex:1;}
+.page.active{display:flex;flex-direction:column;}
 .section-header{text-align:center;margin-bottom:55px;}
 .section-tag{display:inline-block;background:rgba(13,126,154,0.12);border:1px solid rgba(13,126,154,0.35);color:var(--teal-light);font-size:11px;font-weight:700;padding:4px 13px;border-radius:100px;letter-spacing:2px;margin-bottom:13px;text-transform:uppercase;}
 .section-title{font-family:'Cinzel',serif;font-size:clamp(21px,4vw,36px);color:var(--white);font-weight:700;}
@@ -30,7 +31,8 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .section-divider{width:55px;height:3px;margin:13px auto 0;background:linear-gradient(90deg,var(--gold),var(--teal));border-radius:2px;}
 
 /* HERO */
-#heroPage{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 30px 70px;}
+#heroPage{min-height:100vh;}
+.hero-inner{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 30px 70px;position:relative;z-index:1;}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.08);padding:6px 18px;border-radius:100px;font-size:12px;color:var(--gold-light);margin-bottom:26px;}
 .hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
@@ -169,6 +171,7 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .fa2{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap;}
 .bs{background:linear-gradient(135deg,var(--success),#1E9E6B);color:white;border:none;padding:9px 20px;border-radius:9px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s;}
 .bs:hover{transform:translateY(-1px);}
+.bs:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .bc{background:rgba(255,255,255,0.05);color:var(--gray);border:1px solid rgba(255,255,255,0.08);padding:9px 20px;border-radius:9px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.3s;}
 .bc:hover{background:rgba(255,255,255,0.1);color:var(--white);}
 .blogout{background:rgba(224,82,82,0.1);color:var(--danger);border:1px solid rgba(224,82,82,0.2);padding:7px 15px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;transition:all 0.3s;}
@@ -206,15 +209,21 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .lbx-close{position:absolute;top:18px;left:18px;background:rgba(255,255,255,0.1);border:none;color:white;width:42px;height:42px;border-radius:50%;font-size:19px;cursor:pointer;}
 .lbx-close:hover{background:rgba(224,82,82,0.28);}
 
-/* EMPTY / TOAST */
+/* EMPTY / TOAST / LOADING */
 .empty{text-align:center;padding:48px 20px;color:var(--gray);}
 .empty .ei{font-size:42px;margin-bottom:11px;opacity:0.33;}
 .empty p{font-size:14px;}
 .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:rgba(46,204,143,0.95);color:#000;padding:10px 22px;border-radius:11px;font-weight:700;font-size:13px;z-index:9999;opacity:0;transition:all 0.4s;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(-7px);}
 .toast.err{background:rgba(224,82,82,0.95);color:white;}
+.loading-spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-left:6px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fb-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--gray);padding:4px 10px;background:rgba(255,255,255,0.04);border-radius:20px;border:1px solid rgba(255,255,255,0.07);}
+.fb-dot{width:7px;height:7px;border-radius:50%;background:var(--success);flex-shrink:0;}
+.fb-dot.err{background:var(--danger);}
+.fb-dot.loading{background:var(--gold);animation:pulse 1s infinite;}
 
-footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,0.05);padding:32px 30px;text-align:center;color:var(--gray);font-size:12px;}
+footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,0.05);padding:32px 30px;text-align:center;color:var(--gray);font-size:12px;margin-top:auto;}
 footer span{color:var(--gold-light);}
 
 ::-webkit-scrollbar{width:5px;}
@@ -252,9 +261,11 @@ footer span{color:var(--gold-light);}
   </div>
 </nav>
 
+<div id="mainWrap">
+
 <!-- HERO -->
 <div id="heroPage" class="page active">
-  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:110px 30px 70px;position:relative;z-index:1;">
+  <div class="hero-inner">
     <div>
       <div class="hero-badge">🔬 قسم المختبرات الطبية</div>
       <h1 class="hero-title">Father of Microscope</h1>
@@ -267,56 +278,62 @@ footer span{color:var(--gold-light);}
       </div>
     </div>
   </div>
-  <footer><p>© 2024 <span>Father of Microscope</span> — قسم المختبرات الطبية</p><p style="margin-top:5px;font-size:11px;">الحاسبات للأغراض التعليمية فقط • استشر الطبيب المختص</p></footer>
+  <footer><p>© 2025 <span>Father of Microscope</span> — قسم المختبرات الطبية</p><p style="margin-top:5px;font-size:11px;">الحاسبات للأغراض التعليمية فقط • استشر الطبيب المختص</p></footer>
 </div>
 
 <!-- TEAM -->
 <div id="teamPage" class="page">
-  <div style="padding:95px 30px 80px;">
+  <div style="padding:95px 30px 80px;flex:1;">
     <div class="section-header">
       <div class="section-tag">Our Team</div>
       <h2 class="section-title">فريق <span>Father of Microscope</span></h2>
       <div class="section-divider"></div>
     </div>
-    <div class="team-grid" id="teamGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">👥</div><p>سيتم إضافة أعضاء الفريق من لوحة الإدارة</p></div></div>
+    <div class="team-grid" id="teamGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">👥</div><p>جاري التحميل...</p></div></div>
   </div>
+  <footer><p>© 2025 <span>Father of Microscope</span></p></footer>
 </div>
 
 <!-- CASES -->
 <div id="casesPage" class="page">
-  <div style="padding:95px 30px 80px;">
+  <div style="padding:95px 30px 80px;flex:1;">
     <div class="section-header">
       <div class="section-tag">Medical Cases</div>
       <h2 class="section-title">الكيسات <span>الطبية</span></h2>
       <div class="section-divider"></div>
     </div>
-    <div class="cases-grid" id="casesGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">🧫</div><p>سيتم إضافة الكيسات من لوحة الإدارة</p></div></div>
+    <div class="cases-grid" id="casesGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">🧫</div><p>جاري التحميل...</p></div></div>
   </div>
+  <footer><p>© 2025 <span>Father of Microscope</span></p></footer>
 </div>
 
 <!-- CALCS -->
 <div id="calcsPage" class="page">
-  <div style="padding:95px 30px 80px;">
+  <div style="padding:95px 30px 80px;flex:1;">
     <div class="section-header">
       <div class="section-tag">Medical Calculators</div>
       <h2 class="section-title">الحاسبات <span>الطبية</span></h2>
       <div class="section-divider"></div>
     </div>
-    <div class="calc-grid" id="calcGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">🧮</div><p>سيتم إضافة الحاسبات من لوحة الإدارة</p></div></div>
+    <div class="calc-grid" id="calcGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">🧮</div><p>جاري التحميل...</p></div></div>
   </div>
+  <footer><p>© 2025 <span>Father of Microscope</span></p></footer>
 </div>
 
 <!-- VIDEOS -->
 <div id="videosPage" class="page">
-  <div style="padding:95px 30px 80px;">
+  <div style="padding:95px 30px 80px;flex:1;">
     <div class="section-header">
       <div class="section-tag">Educational Videos</div>
       <h2 class="section-title">الفيديوهات <span>التعليمية</span></h2>
       <div class="section-divider"></div>
     </div>
-    <div class="vids-grid" id="vidsGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">🎬</div><p>سيتم إضافة الفيديوهات من لوحة الإدارة</p></div></div>
+    <div class="vids-grid" id="vidsGrid"><div class="empty" style="grid-column:1/-1;"><div class="ei">🎬</div><p>جاري التحميل...</p></div></div>
   </div>
+  <footer><p>© 2025 <span>Father of Microscope</span></p></footer>
 </div>
+
+</div><!-- /mainWrap -->
 
 <!-- LOGIN MODAL -->
 <div class="mo" id="loginMo">
@@ -336,8 +353,14 @@ footer span{color:var(--gold-light);}
   <div class="md">
     <button class="md-close" onclick="closeMo('adminMo')">✕</button>
     <div class="atop">
-      <div><h2>⚙️ لوحة الإدارة</h2><p>إدارة محتوى الموقع</p></div>
-      <button class="blogout" onclick="closeMo('adminMo')">خروج 🚪</button>
+      <div>
+        <h2>⚙️ لوحة الإدارة</h2>
+        <p>إدارة محتوى الموقع</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="fb-status"><div class="fb-dot loading" id="fbDot"></div><span id="fbTxt">جاري الاتصال...</span></div>
+        <button class="blogout" onclick="closeMo('adminMo')">خروج 🚪</button>
+      </div>
     </div>
     <div class="atabs">
       <div class="atab active" onclick="aTab('ap1')">👥 الأعضاء</div>
@@ -358,13 +381,9 @@ footer span{color:var(--gold-light);}
           </div>
           <div class="ag af"><label>النبذة الشخصية</label><textarea id="mb" rows="3" placeholder="نبذة مختصرة عن العضو..."></textarea></div>
           <div class="ag af">
-            <label>صورة العضو</label>
-            <div class="uarea" onclick="document.getElementById('mif').click()" id="mia">
-              <input type="file" id="mif" accept="image/*" onchange="li1(this)">
-              <div style="font-size:26px">📷</div><p>اضغط لرفع الصورة</p>
-              <div id="mip" class="uprevs"></div>
-            </div>
-            <input type="hidden" id="mid">
+            <label>صورة العضو (URL مباشر)</label>
+            <input type="text" id="mid" placeholder="https://i.ibb.co/xxx/photo.jpg" oninput="prevImg(this.value,'mip','mia')">
+            <div id="mip" class="uprevs" style="margin-top:8px;"></div>
           </div>
           <div class="ag af">
             <label>روابط السوشل ميديا</label>
@@ -377,7 +396,7 @@ footer span{color:var(--gold-light);}
               <input type="text" id="stk" placeholder="🎵 TikTok URL">
             </div>
           </div>
-          <div class="fa2"><button class="bs" onclick="saveMem()">💾 حفظ العضو</button><button class="bc" onclick="resetMem()">إلغاء</button></div>
+          <div class="fa2"><button class="bs" id="savMemBtn" onclick="saveMem()">💾 حفظ العضو</button><button class="bc" onclick="resetMem()">إلغاء</button></div>
         </div>
         <p style="font-size:12px;color:var(--gray);margin-bottom:11px;">الأعضاء الحاليين</p>
         <div class="alist" id="aml"></div>
@@ -394,14 +413,11 @@ footer span{color:var(--gold-light);}
           </div>
           <div class="ag af"><label>الشرح التفصيلي *</label><textarea id="cd" rows="5" placeholder="شرح مفصل للكيس الطبي..."></textarea></div>
           <div class="ag af">
-            <label>صور الكيس (يمكن رفع أكثر من صورة)</label>
-            <div class="uarea" onclick="document.getElementById('cif').click()" id="cia">
-              <input type="file" id="cif" accept="image/*" multiple onchange="liM(this)">
-              <div style="font-size:26px">🖼️</div><p>اضغط لرفع الصور</p>
-              <div id="cip" class="uprevs"></div>
-            </div>
+            <label>روابط الصور (كل رابط في سطر — imgbb أو أي رابط مباشر)</label>
+            <textarea id="cimgurls" rows="3" placeholder="https://i.ibb.co/xxx/img1.jpg&#10;https://i.ibb.co/xxx/img2.jpg" oninput="prevCaseImgs()"></textarea>
+            <div id="cip" class="uprevs" style="margin-top:8px;"></div>
           </div>
-          <div class="fa2"><button class="bs" onclick="saveCase()">💾 حفظ الكيس</button><button class="bc" onclick="resetCase()">إلغاء</button></div>
+          <div class="fa2"><button class="bs" id="savCaseBtn" onclick="saveCase()">💾 حفظ الكيس</button><button class="bc" onclick="resetCase()">إلغاء</button></div>
         </div>
         <p style="font-size:12px;color:var(--gray);margin-bottom:11px;">الكيسات الحالية</p>
         <div class="alist" id="acl"></div>
@@ -439,7 +455,7 @@ footer span{color:var(--gold-light);}
             <div class="ag"><label>وحدة النتيجة</label><input type="text" id="calcu" placeholder="mg/dL"></div>
             <div class="ag"><label>تفسير النتيجة</label><input type="text" id="calcint" placeholder="طبيعي: أقل من 100 mg/dL"></div>
           </div>
-          <div class="fa2"><button class="bs" onclick="saveCalc()">💾 حفظ الحاسبة</button><button class="bc" onclick="resetCalc()">إلغاء</button></div>
+          <div class="fa2"><button class="bs" id="savCalcBtn" onclick="saveCalc()">💾 حفظ الحاسبة</button><button class="bc" onclick="resetCalc()">إلغاء</button></div>
         </div>
         <p style="font-size:12px;color:var(--gray);margin-bottom:11px;">الحاسبات الحالية</p>
         <div class="alist" id="acalcl"></div>
@@ -453,7 +469,7 @@ footer span{color:var(--gold-light);}
           <div class="ag af"><label>عنوان الفيديو *</label><input type="text" id="vt" placeholder="شرح تحليل CBC"></div>
           <div class="ag af"><label>رابط يوتيوب * (youtu.be/... أو youtube.com/watch?v=...)</label><input type="text" id="vu" placeholder="https://youtu.be/..."></div>
           <div class="ag af"><label>وصف الفيديو</label><textarea id="vd" rows="2" placeholder="وصف مختصر..."></textarea></div>
-          <div class="fa2"><button class="bs" onclick="saveVid()">💾 حفظ الفيديو</button><button class="bc" onclick="resetVid()">إلغاء</button></div>
+          <div class="fa2"><button class="bs" id="savVidBtn" onclick="saveVid()">💾 حفظ الفيديو</button><button class="bc" onclick="resetVid()">إلغاء</button></div>
         </div>
         <p style="font-size:12px;color:var(--gray);margin-bottom:11px;">الفيديوهات الحالية</p>
         <div class="alist" id="avl"></div>
@@ -479,45 +495,118 @@ footer span{color:var(--gold-light);}
 
 <div class="toast" id="toast"></div>
 
-<!-- SECRET ZONE: triple-click bottom-left corner to open admin -->
+<!-- SECRET ZONE: triple-click bottom-left corner -->
 <div id="sz" style="position:fixed;bottom:0;left:0;width:55px;height:55px;z-index:500;" onclick="secret()"></div>
 
 <script>
-// PASSWORD HASH (SHA-256 of "alyamanlab1998")
-const PH="0c00092a05b171c2e9afa1f177b30eafdc6fe46e05d25ad62f2a9db7ae52e36d";
+// ======================== FIREBASE CONFIG ========================
+const FB_PROJECT = 'father-of-microscope-74f5b';
+const FB_KEY     = 'AIzaSyDRh7hpxYNVGXHamB4YbWKTwnN9Zky9cQA';
+const FB_BASE    = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents`;
+
+// ======================== PASSWORD ========================
+const PH = "0c00092a05b171c2e9afa1f177b30eafdc6fe46e05d25ad62f2a9db7ae52e36d";
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
 
-// DATA
-let members=JSON.parse(localStorage.getItem('fom_m')||'[]');
-let cases=JSON.parse(localStorage.getItem('fom_c')||'[]');
-let calcs=JSON.parse(localStorage.getItem('fom_k')||'[]');
-let videos=JSON.parse(localStorage.getItem('fom_v')||'[]');
+// ======================== DATA CACHE ========================
+let members=[], cases=[], calcs=[], videos=[];
 
-if(!calcs.length){
-  calcs=[
-    {id:'ldl',name:'حاسبة LDL (فريدوالد)',icon:'🩸',desc:'حساب الكوليسترول السيئ LDL',formula:'TC - HDL - (TG/5)',fields:['TC','HDL','TG'],unit:'mg/dL',interp:'مثالي: <100 | جيد: 100-129 | حدّي: 130-159 | مرتفع: 160+'},
-    {id:'homa',name:'حاسبة HOMA-IR',icon:'🍬',desc:'مقاومة الأنسولين',formula:'(glucose * insulin) / 405',fields:['glucose','insulin'],unit:'',interp:'طبيعي: <1.9 | مقاومة خفيفة: 1.9-2.9 | مقاومة: >2.9'},
-    {id:'gfr',name:'حاسبة GFR (CKD-EPI)',icon:'🫘',desc:'معدل الترشيح الكبيبي',formula:`(function(){let k=(gender==='F')?0.7:0.9,a=(gender==='F')?-0.241:-0.302,r=creatinine/k,g=142*Math.pow(Math.min(r,1),a)*Math.pow(Math.max(r,1),-1.200)*Math.pow(0.9938,age);if(gender==='F')g*=1.012;return g;})()`,fields:['creatinine','age','gender'],unit:'mL/min/1.73m²',interp:'G1:≥90 طبيعي | G2:60-89 | G3a:45-59 | G3b:30-44 | G4:15-29 | G5:<15 فشل كلوي'}
-  ];
-  sv();
+// ======================== FIRESTORE HELPERS ========================
+function toFS(obj) {
+  const fields = {};
+  for (const [k,v] of Object.entries(obj)) {
+    if (v === null || v === undefined) continue;
+    if (typeof v === 'string')        fields[k] = {stringValue: v};
+    else if (typeof v === 'number')   fields[k] = {doubleValue: v};
+    else if (typeof v === 'boolean')  fields[k] = {booleanValue: v};
+    else if (Array.isArray(v))        fields[k] = {arrayValue:{values: v.map(i => typeof i==='string'?{stringValue:i}:{stringValue:JSON.stringify(i)})}};
+    else if (typeof v === 'object')   fields[k] = {stringValue: JSON.stringify(v)};
+  }
+  return {fields};
 }
 
-function sv(){localStorage.setItem('fom_m',JSON.stringify(members));localStorage.setItem('fom_c',JSON.stringify(cases));localStorage.setItem('fom_k',JSON.stringify(calcs));localStorage.setItem('fom_v',JSON.stringify(videos));}
+function fromFS(doc) {
+  if (!doc.fields) return null;
+  const obj = {_fsId: doc.name.split('/').pop()};
+  for (const [k,v] of Object.entries(doc.fields)) {
+    if (v.stringValue !== undefined) {
+      try { obj[k] = JSON.parse(v.stringValue); } catch { obj[k] = v.stringValue; }
+    }
+    else if (v.doubleValue !== undefined) obj[k] = v.doubleValue;
+    else if (v.integerValue !== undefined) obj[k] = parseInt(v.integerValue);
+    else if (v.booleanValue !== undefined) obj[k] = v.booleanValue;
+    else if (v.arrayValue !== undefined)  obj[k] = (v.arrayValue.values||[]).map(i=>i.stringValue!==undefined?i.stringValue:i);
+  }
+  return obj;
+}
 
-// NAV
+async function fbGet(col) {
+  const r = await fetch(`${FB_BASE}/${col}?key=${FB_KEY}`);
+  if (!r.ok) throw new Error(await r.text());
+  const d = await r.json();
+  return (d.documents||[]).map(fromFS).filter(Boolean);
+}
+
+async function fbSet(col, id, data) {
+  const url = `${FB_BASE}/${col}/${id}?key=${FB_KEY}`;
+  const r = await fetch(url, {method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(toFS(data))});
+  if (!r.ok) throw new Error(await r.text());
+  return fromFS(await r.json());
+}
+
+async function fbDel(col, id) {
+  const r = await fetch(`${FB_BASE}/${col}/${id}?key=${FB_KEY}`, {method:'DELETE'});
+  if (!r.ok) throw new Error(await r.text());
+}
+
+function fbId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+// FB status indicator
+function setFbStatus(state, msg) {
+  const dot = document.getElementById('fbDot');
+  const txt = document.getElementById('fbTxt');
+  if (!dot) return;
+  dot.className = 'fb-dot' + (state==='ok'?'':state==='err'?' err':' loading');
+  txt.textContent = msg;
+}
+
+// ======================== LOAD ALL DATA ========================
+async function loadAll() {
+  try {
+    setFbStatus('loading','جاري الاتصال...');
+    const [m,c,k,v] = await Promise.all([fbGet('members'),fbGet('cases'),fbGet('calcs'),fbGet('videos')]);
+    members = m; cases = c; calcs = k; videos = v;
+
+    // seed default calcs if empty
+    if (!calcs.length) await seedCalcs();
+
+    setFbStatus('ok','متصل بـ Firebase ✓');
+    rTeam(); rCases(); rCalcs(); rVids(); updStats();
+  } catch(e) {
+    setFbStatus('err','خطأ في الاتصال ⚠️');
+    toast('خطأ في تحميل البيانات: ' + e.message, true);
+  }
+}
+
+async function seedCalcs() {
+  const defaults = [
+    {id:'ldl',name:'حاسبة LDL (فريدوالد)',icon:'🩸',desc:'حساب الكوليسترول السيئ LDL',formula:'TC - HDL - (TG/5)',fields:['TC','HDL','TG'],unit:'mg/dL',interp:'مثالي: <100 | جيد: 100-129 | حدّي: 130-159 | مرتفع: 160+'},
+    {id:'homa',name:'حاسبة HOMA-IR',icon:'🍬',desc:'مقاومة الأنسولين',formula:'(glucose * insulin) / 405',fields:['glucose','insulin'],unit:'',interp:'طبيعي: <1.9 | مقاومة خفيفة: 1.9-2.9 | مقاومة: >2.9'},
+    {id:'gfr',name:'حاسبة GFR (CKD-EPI)',icon:'🫘',desc:'معدل الترشيح الكبيبي',formula:"(function(){let k=(gender==='F')?0.7:0.9,a=(gender==='F')?-0.241:-0.302,r=creatinine/k,g=142*Math.pow(Math.min(r,1),a)*Math.pow(Math.max(r,1),-1.200)*Math.pow(0.9938,age);if(gender==='F')g*=1.012;return g;})()",fields:['creatinine','age','gender'],unit:'mL/min/1.73m²',interp:'G1:≥90 طبيعي | G2:60-89 | G3a:45-59 | G3b:30-44 | G4:15-29 | G5:<15 فشل كلوي'}
+  ];
+  for (const c of defaults) await fbSet('calcs', c.id, c);
+  calcs = defaults;
+}
+
+// ======================== NAV ========================
 const PAGES=['heroPage','teamPage','casesPage','calcsPage','videosPage'];
 function go(id){
   PAGES.forEach(p=>document.getElementById(p).classList.toggle('active',p===id));
   document.querySelectorAll('.nav-link').forEach((b,i)=>b.classList.toggle('active',PAGES[i]===id));
   window.scrollTo(0,0);
-  if(id==='teamPage')rTeam();
-  if(id==='casesPage')rCases();
-  if(id==='calcsPage')rCalcs();
-  if(id==='videosPage')rVids();
-  updStats();
 }
 
-// SECRET ADMIN
+// ======================== SECRET ADMIN ========================
 let sc=0,st=null;
 function secret(){sc++;clearTimeout(st);st=setTimeout(()=>sc=0,700);if(sc>=3){sc=0;openLogin();}}
 function openLogin(){document.getElementById('loginMo').classList.add('show');}
@@ -536,95 +625,147 @@ function aTab(id){
   document.getElementById(id).classList.add('active');
 }
 
-// TOAST
+// ======================== TOAST ========================
 function toast(msg,err=false){const t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(err?' err':'')+' show';setTimeout(()=>t.classList.remove('show'),2800);}
 
-// IMAGE LOADERS
-function li1(inp){
-  const f=inp.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=e=>{document.getElementById('mid').value=e.target.result;document.getElementById('mip').innerHTML=`<img src="${e.target.result}">`;document.getElementById('mia').classList.add('hf');};
-  r.readAsDataURL(f);
+// ======================== IMAGE PREVIEW ========================
+function prevImg(url, previewId, areaId) {
+  const p = document.getElementById(previewId);
+  if (url && url.startsWith('http')) {
+    p.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML=''">`; 
+  } else {
+    p.innerHTML = '';
+  }
 }
-let cImgs=[];
-function liM(inp){
-  const files=[...inp.files];if(!files.length)return;
-  cImgs=[];const prev=document.getElementById('cip');prev.innerHTML='';let n=0;
-  files.forEach(f=>{const r=new FileReader();r.onload=e=>{cImgs.push(e.target.result);prev.innerHTML+=`<img src="${e.target.result}">`;n++;};r.readAsDataURL(f);});
-  document.getElementById('cia').classList.add('hf');
+function prevCaseImgs() {
+  const urls = document.getElementById('cimgurls').value.split('\n').map(u=>u.trim()).filter(u=>u.startsWith('http'));
+  document.getElementById('cip').innerHTML = urls.map(u=>`<img src="${u}" onerror="this.remove()">`).join('');
 }
 
 // ======================== MEMBERS ========================
 let emid=null;
-function saveMem(){
+async function saveMem(){
   const n=document.getElementById('mn').value.trim(),r=document.getElementById('mr').value.trim();
   if(!n||!r){toast('الاسم والمسمى مطلوبان',true);return;}
-  const m={id:emid||Date.now().toString(),name:n,role:r,bio:document.getElementById('mb').value.trim(),img:document.getElementById('mid').value,social:{instagram:document.getElementById('sig').value.trim(),twitter:document.getElementById('stw').value.trim(),linkedin:document.getElementById('sli').value.trim(),facebook:document.getElementById('sfb').value.trim(),snapchat:document.getElementById('ssn').value.trim(),tiktok:document.getElementById('stk').value.trim()}};
-  if(emid){const i=members.findIndex(x=>x.id===emid);if(i>-1)members[i]=m;toast('✅ تم تعديل العضو');}else{members.push(m);toast('✅ تم إضافة العضو');}
-  sv();resetMem();rAml();rTeam();updStats();
+  const btn=document.getElementById('savMemBtn');
+  btn.disabled=true;btn.innerHTML='جاري الحفظ...<span class="loading-spin"></span>';
+  const id=emid||fbId();
+  const m={id,name:n,role:r,bio:document.getElementById('mb').value.trim(),img:document.getElementById('mid').value.trim(),
+    social:JSON.stringify({instagram:document.getElementById('sig').value.trim(),twitter:document.getElementById('stw').value.trim(),linkedin:document.getElementById('sli').value.trim(),facebook:document.getElementById('sfb').value.trim(),snapchat:document.getElementById('ssn').value.trim(),tiktok:document.getElementById('stk').value.trim()})};
+  try {
+    await fbSet('members',id,m);
+    if(emid){const i=members.findIndex(x=>x.id===emid);if(i>-1)members[i]=m;else members.push(m);}else{members.push(m);}
+    toast(emid?'✅ تم تعديل العضو':'✅ تم إضافة العضو');
+    resetMem();rAml();rTeam();updStats();
+  } catch(e){toast('خطأ: '+e.message,true);}
+  btn.disabled=false;btn.innerHTML='💾 حفظ العضو';
 }
-function resetMem(){emid=null;['mn','mr','mb','sig','stw','sli','sfb','ssn','stk','emid','mid'].forEach(id=>document.getElementById(id).value='');document.getElementById('mip').innerHTML='';document.getElementById('mia').classList.remove('hf');}
-function editMem(id){const m=members.find(x=>x.id===id);if(!m)return;emid=id;document.getElementById('mn').value=m.name;document.getElementById('mr').value=m.role;document.getElementById('mb').value=m.bio||'';document.getElementById('sig').value=m.social?.instagram||'';document.getElementById('stw').value=m.social?.twitter||'';document.getElementById('sli').value=m.social?.linkedin||'';document.getElementById('sfb').value=m.social?.facebook||'';document.getElementById('ssn').value=m.social?.snapchat||'';document.getElementById('stk').value=m.social?.tiktok||'';document.getElementById('mid').value=m.img||'';if(m.img){document.getElementById('mip').innerHTML=`<img src="${m.img}">`;document.getElementById('mia').classList.add('hf');}document.getElementById('ap1').scrollIntoView({behavior:'smooth'});}
-function delMem(id){if(!confirm('حذف هذا العضو؟'))return;members=members.filter(x=>x.id!==id);sv();rAml();rTeam();updStats();toast('🗑️ تم الحذف');}
-function rAml(){const el=document.getElementById('aml');if(!members.length){el.innerHTML='<div class="empty"><div class="ei">👥</div><p>لا يوجد أعضاء</p></div>';return;}el.innerHTML=members.map(m=>`<div class="ai"><div class="aiimg">${m.img?`<img src="${m.img}">`:'🧑‍🔬'}</div><div class="aiinfo"><div class="ain">${m.name}</div><div class="ais">${m.role}</div></div><div class="aiac"><button class="bico be" onclick="editMem('${m.id}')">✏️</button><button class="bico bd" onclick="delMem('${m.id}')">🗑️</button></div></div>`).join('');}
+function resetMem(){emid=null;['mn','mr','mb','sig','stw','sli','sfb','ssn','stk','mid'].forEach(id=>document.getElementById(id).value='');document.getElementById('mip').innerHTML='';}
+function editMem(id){
+  const m=members.find(x=>x.id===id||x._fsId===id);if(!m)return;
+  emid=m.id||m._fsId;
+  document.getElementById('mn').value=m.name;document.getElementById('mr').value=m.role;document.getElementById('mb').value=m.bio||'';
+  const soc=typeof m.social==='object'?m.social:(m.social?JSON.parse(m.social):{});
+  document.getElementById('sig').value=soc.instagram||'';document.getElementById('stw').value=soc.twitter||'';document.getElementById('sli').value=soc.linkedin||'';document.getElementById('sfb').value=soc.facebook||'';document.getElementById('ssn').value=soc.snapchat||'';document.getElementById('stk').value=soc.tiktok||'';
+  document.getElementById('mid').value=m.img||'';prevImg(m.img||'','mip','mia');
+  document.getElementById('ap1').scrollIntoView({behavior:'smooth'});
+}
+async function delMem(id){
+  if(!confirm('حذف هذا العضو؟'))return;
+  const docId=members.find(x=>x.id===id||x._fsId===id)?._fsId||id;
+  try{await fbDel('members',docId);members=members.filter(x=>x.id!==id&&x._fsId!==id);rAml();rTeam();updStats();toast('🗑️ تم الحذف');}
+  catch(e){toast('خطأ: '+e.message,true);}
+}
+function rAml(){const el=document.getElementById('aml');if(!members.length){el.innerHTML='<div class="empty"><div class="ei">👥</div><p>لا يوجد أعضاء</p></div>';return;}el.innerHTML=members.map(m=>`<div class="ai"><div class="aiimg">${m.img?`<img src="${m.img}">`:'🧑‍🔬'}</div><div class="aiinfo"><div class="ain">${m.name}</div><div class="ais">${m.role}</div></div><div class="aiac"><button class="bico be" onclick="editMem('${m.id||m._fsId}')">✏️</button><button class="bico bd" onclick="delMem('${m.id||m._fsId}')">🗑️</button></div></div>`).join('');}
 function rTeam(){const g=document.getElementById('teamGrid');g.innerHTML='';if(!members.length){g.innerHTML='<div class="empty" style="grid-column:1/-1;"><div class="ei">👥</div><p>سيتم إضافة أعضاء الفريق من لوحة الإدارة</p></div>';return;}
-  members.forEach(m=>{const soc=Object.entries(m.social||{}).filter(([k,v])=>v).map(([k,v])=>{const ic={instagram:'🟣',twitter:'🐦',linkedin:'💼',facebook:'🔵',snapchat:'👻',tiktok:'🎵'};const lb={instagram:'Instagram',twitter:'X',linkedin:'LinkedIn',facebook:'Facebook',snapchat:'Snapchat',tiktok:'TikTok'};const cl={instagram:'ig',twitter:'tw',linkedin:'li',facebook:'fb',snapchat:'sn',tiktok:'tk'};return`<a href="${v}" target="_blank" class="soc-a ${cl[k]}">${ic[k]} ${lb[k]}</a>`;}).join('');const c=document.createElement('div');c.className='team-card';c.innerHTML=`<div class="cimg">${m.img?`<img src="${m.img}">`:'<div class="cimg-ph">🧑‍🔬</div>'}</div><div class="cbody"><div class="cname">${m.name}</div><div class="crole">${m.role}</div>${m.bio?`<div class="cbio">${m.bio}</div>`:''}${soc?`<div class="socials">${soc}</div>`:''}</div>`;g.appendChild(c);});}
+  members.forEach(m=>{const soc=typeof m.social==='object'?m.social:(m.social?JSON.parse(m.social):{});const socH=Object.entries(soc||{}).filter(([k,v])=>v).map(([k,v])=>{const ic={instagram:'🟣',twitter:'🐦',linkedin:'💼',facebook:'🔵',snapchat:'👻',tiktok:'🎵'};const lb={instagram:'Instagram',twitter:'X',linkedin:'LinkedIn',facebook:'Facebook',snapchat:'Snapchat',tiktok:'TikTok'};const cl={instagram:'ig',twitter:'tw',linkedin:'li',facebook:'fb',snapchat:'sn',tiktok:'tk'};return`<a href="${v}" target="_blank" class="soc-a ${cl[k]}">${ic[k]} ${lb[k]}</a>`;}).join('');const c=document.createElement('div');c.className='team-card';c.innerHTML=`<div class="cimg">${m.img?`<img src="${m.img}">`:'<div class="cimg-ph">🧑‍🔬</div>'}</div><div class="cbody"><div class="cname">${m.name}</div><div class="crole">${m.role}</div>${m.bio?`<div class="cbio">${m.bio}</div>`:''}${socH?`<div class="socials">${socH}</div>`:''}</div>`;g.appendChild(c);});}
 
 // ======================== CASES ========================
 let ecid=null;
-function saveCase(){
+async function saveCase(){
   const t=document.getElementById('ct').value.trim(),d=document.getElementById('cd').value.trim();
   if(!t||!d){toast('العنوان والشرح مطلوبان',true);return;}
-  const imgs=ecid&&!cImgs.length?(cases.find(x=>x.id===ecid)?.imgs||[]):cImgs;
-  const c={id:ecid||Date.now().toString(),title:t,desc:d,category:document.getElementById('cc').value.trim(),imgs};
-  if(ecid){const i=cases.findIndex(x=>x.id===ecid);if(i>-1)cases[i]=c;toast('✅ تم تعديل الكيس');}else{cases.push(c);toast('✅ تم إضافة الكيس');}
-  sv();resetCase();rAcl();rCases();updStats();
+  const imgs=document.getElementById('cimgurls').value.split('\n').map(u=>u.trim()).filter(u=>u.startsWith('http'));
+  const btn=document.getElementById('savCaseBtn');
+  btn.disabled=true;btn.innerHTML='جاري الحفظ...<span class="loading-spin"></span>';
+  const id=ecid||fbId();
+  const c={id,title:t,desc:d,category:document.getElementById('cc').value.trim(),imgs:imgs.join('|||')};
+  try{
+    await fbSet('cases',id,c);
+    c.imgs=imgs;
+    if(ecid){const i=cases.findIndex(x=>x.id===ecid);if(i>-1)cases[i]=c;else cases.push(c);}else{cases.push(c);}
+    toast(ecid?'✅ تم تعديل الكيس':'✅ تم إضافة الكيس');
+    resetCase();rAcl();rCases();updStats();
+  }catch(e){toast('خطأ: '+e.message,true);}
+  btn.disabled=false;btn.innerHTML='💾 حفظ الكيس';
 }
-function resetCase(){ecid=null;cImgs=[];['ct','cc','cd','ecid'].forEach(id=>document.getElementById(id).value='');document.getElementById('cip').innerHTML='';document.getElementById('cia').classList.remove('hf');document.getElementById('cif').value='';}
-function editCase(id){const c=cases.find(x=>x.id===id);if(!c)return;ecid=id;document.getElementById('ct').value=c.title;document.getElementById('cc').value=c.category||'';document.getElementById('cd').value=c.desc;cImgs=c.imgs||[];document.getElementById('cip').innerHTML=cImgs.map(i=>`<img src="${i}">`).join('');if(cImgs.length)document.getElementById('cia').classList.add('hf');document.getElementById('ap2').scrollIntoView({behavior:'smooth'});}
-function delCase(id){if(!confirm('حذف هذا الكيس؟'))return;cases=cases.filter(x=>x.id!==id);sv();rAcl();rCases();updStats();toast('🗑️ تم الحذف');}
-function rAcl(){const el=document.getElementById('acl');if(!cases.length){el.innerHTML='<div class="empty"><div class="ei">🧫</div><p>لا توجد كيسات</p></div>';return;}el.innerHTML=cases.map(c=>`<div class="ai"><div class="aiimg">${c.imgs?.length?`<img src="${c.imgs[0]}">`:'🧫'}</div><div class="aiinfo"><div class="ain">${c.title}</div><div class="ais">${c.category||'—'} • ${c.imgs?.length||0} صورة</div></div><div class="aiac"><button class="bico be" onclick="editCase('${c.id}')">✏️</button><button class="bico bd" onclick="delCase('${c.id}')">🗑️</button></div></div>`).join('');}
+function resetCase(){ecid=null;['ct','cc','cd','cimgurls'].forEach(id=>document.getElementById(id).value='');document.getElementById('cip').innerHTML='';}
+function editCase(id){
+  const c=cases.find(x=>x.id===id||x._fsId===id);if(!c)return;
+  ecid=c.id||c._fsId;
+  document.getElementById('ct').value=c.title;document.getElementById('cc').value=c.category||'';document.getElementById('cd').value=c.desc;
+  const imgs=Array.isArray(c.imgs)?c.imgs:(typeof c.imgs==='string'?c.imgs.split('|||').filter(Boolean):[]);
+  document.getElementById('cimgurls').value=imgs.join('\n');
+  document.getElementById('cip').innerHTML=imgs.map(u=>`<img src="${u}" onerror="this.remove()">`).join('');
+  document.getElementById('ap2').scrollIntoView({behavior:'smooth'});
+}
+async function delCase(id){
+  if(!confirm('حذف هذا الكيس؟'))return;
+  const docId=cases.find(x=>x.id===id||x._fsId===id)?._fsId||id;
+  try{await fbDel('cases',docId);cases=cases.filter(x=>x.id!==id&&x._fsId!==id);rAcl();rCases();updStats();toast('🗑️ تم الحذف');}
+  catch(e){toast('خطأ: '+e.message,true);}
+}
+function rAcl(){const el=document.getElementById('acl');if(!cases.length){el.innerHTML='<div class="empty"><div class="ei">🧫</div><p>لا توجد كيسات</p></div>';return;}el.innerHTML=cases.map(c=>{const imgs=Array.isArray(c.imgs)?c.imgs:(typeof c.imgs==='string'?c.imgs.split('|||').filter(Boolean):[]);return`<div class="ai"><div class="aiimg">${imgs.length?`<img src="${imgs[0]}">`:'🧫'}</div><div class="aiinfo"><div class="ain">${c.title}</div><div class="ais">${c.category||'—'} • ${imgs.length} صورة</div></div><div class="aiac"><button class="bico be" onclick="editCase('${c.id||c._fsId}')">✏️</button><button class="bico bd" onclick="delCase('${c.id||c._fsId}')">🗑️</button></div></div>`;}).join('');}
 function rCases(){const g=document.getElementById('casesGrid');g.innerHTML='';if(!cases.length){g.innerHTML='<div class="empty" style="grid-column:1/-1;"><div class="ei">🧫</div><p>سيتم إضافة الكيسات من لوحة الإدارة</p></div>';return;}
-  cases.forEach(c=>{const card=document.createElement('div');card.className='case-card';card.onclick=()=>openCase(c.id);card.innerHTML=`<div class="case-img-wrap">${c.imgs?.length?`<img src="${c.imgs[0]}"><div class="case-img-badge">🖼️ ${c.imgs.length} صورة</div>`:'<div class="case-img-ph">🧫</div>'}</div><div class="case-body">${c.category?`<div class="case-cat">${c.category}</div>`:''}<div class="case-title">${c.title}</div><div class="case-excerpt">${c.desc.substring(0,110)}${c.desc.length>110?'...':''}</div><div class="case-more">اقرأ أكثر ←</div></div>`;g.appendChild(card);});}
-function openCase(id){const c=cases.find(x=>x.id===id);if(!c)return;const imgs=c.imgs?.length?c.imgs.map((img,i,a)=>`<img src="${img}" style="width:${a.length===1?'100%':'calc(50% - 4px)'};height:190px;" onclick="openLbx('${img}')">`).join(''):'';document.getElementById('cmContent').innerHTML=`${imgs?`<div class="cmd-imgs">${imgs}</div>`:''}<div>${c.category?`<div class="case-cat">${c.category}</div>`:''}<div class="cmd-h2">${c.title}</div><p class="cmd-p">${c.desc.replace(/\n/g,'<br>')}</p></div>`;document.getElementById('caseMo').classList.add('show');}
+  cases.forEach(c=>{const imgs=Array.isArray(c.imgs)?c.imgs:(typeof c.imgs==='string'?c.imgs.split('|||').filter(Boolean):[]);const card=document.createElement('div');card.className='case-card';card.onclick=()=>openCase(c.id||c._fsId);card.innerHTML=`<div class="case-img-wrap">${imgs.length?`<img src="${imgs[0]}"><div class="case-img-badge">🖼️ ${imgs.length} صورة</div>`:'<div class="case-img-ph">🧫</div>'}</div><div class="case-body">${c.category?`<div class="case-cat">${c.category}</div>`:''}<div class="case-title">${c.title}</div><div class="case-excerpt">${c.desc.substring(0,110)}${c.desc.length>110?'...':''}</div><div class="case-more">اقرأ أكثر ←</div></div>`;g.appendChild(card);});}
+function openCase(id){const c=cases.find(x=>x.id===id||x._fsId===id);if(!c)return;const imgs=Array.isArray(c.imgs)?c.imgs:(typeof c.imgs==='string'?c.imgs.split('|||').filter(Boolean):[]);const imgH=imgs.map((img,i,a)=>`<img src="${img}" style="width:${a.length===1?'100%':'calc(50% - 4px)'};height:190px;" onclick="openLbx('${img}')">`).join('');document.getElementById('cmContent').innerHTML=`${imgH?`<div class="cmd-imgs">${imgH}</div>`:''}<div>${c.category?`<div class="case-cat">${c.category}</div>`:''}<div class="cmd-h2">${c.title}</div><p class="cmd-p">${c.desc.replace(/\n/g,'<br>')}</p></div>`;document.getElementById('caseMo').classList.add('show');}
 function openLbx(src){document.getElementById('lbxImg').src=src;document.getElementById('lbx').classList.add('show');}
 function closeLbx(){document.getElementById('lbx').classList.remove('show');}
 
 // ======================== CALCS ========================
 const FI={TC:{label:'الكوليسترول الكلي (TC)',unit:'mg/dL',t:'n'},HDL:{label:'HDL',unit:'mg/dL',t:'n'},LDL:{label:'LDL',unit:'mg/dL',t:'n'},TG:{label:'الثلاثيات (TG)',unit:'mg/dL',t:'n'},glucose:{label:'الجلوكوز',unit:'mg/dL',t:'n'},insulin:{label:'الأنسولين',unit:'μU/mL',t:'n'},creatinine:{label:'الكرياتنين',unit:'mg/dL',t:'n',step:'0.01'},urea:{label:'اليوريا',unit:'mg/dL',t:'n'},age:{label:'العمر',unit:'سنة',t:'n'},gender:{label:'الجنس',t:'s',opts:['M:ذكر','F:أنثى']},weight:{label:'الوزن',unit:'kg',t:'n'},height:{label:'الطول',unit:'cm',t:'n'}};
 let ecalcid=null;
-function saveCalc(){
+async function saveCalc(){
   const n=document.getElementById('calcn').value.trim(),f=document.getElementById('calcf').value.trim();
   if(!n||!f){toast('الاسم والمعادلة مطلوبان',true);return;}
   const fields=[...document.querySelectorAll('.fchk:checked')].map(c=>c.value);
   if(!fields.length){toast('اختر حقلاً على الأقل',true);return;}
-  const c={id:ecalcid||Date.now().toString(),name:n,icon:document.getElementById('calci').value||'🧪',desc:document.getElementById('calcd').value.trim(),formula:f,fields,unit:document.getElementById('calcu').value.trim(),interp:document.getElementById('calcint').value.trim()};
-  if(ecalcid){const i=calcs.findIndex(x=>x.id===ecalcid);if(i>-1)calcs[i]=c;toast('✅ تم تعديل الحاسبة');}else{calcs.push(c);toast('✅ تم إضافة الحاسبة');}
-  sv();resetCalc();rAcalcl();rCalcs();updStats();
+  const btn=document.getElementById('savCalcBtn');
+  btn.disabled=true;btn.innerHTML='جاري الحفظ...<span class="loading-spin"></span>';
+  const id=ecalcid||fbId();
+  const c={id,name:n,icon:document.getElementById('calci').value||'🧪',desc:document.getElementById('calcd').value.trim(),formula:f,fields:fields.join(','),unit:document.getElementById('calcu').value.trim(),interp:document.getElementById('calcint').value.trim()};
+  try{
+    await fbSet('calcs',id,c);
+    c.fields=fields;
+    if(ecalcid){const i=calcs.findIndex(x=>x.id===ecalcid);if(i>-1)calcs[i]=c;else calcs.push(c);}else{calcs.push(c);}
+    toast(ecalcid?'✅ تم تعديل الحاسبة':'✅ تم إضافة الحاسبة');
+    resetCalc();rAcalcl();rCalcs();updStats();
+  }catch(e){toast('خطأ: '+e.message,true);}
+  btn.disabled=false;btn.innerHTML='💾 حفظ الحاسبة';
 }
-function resetCalc(){ecalcid=null;['calcn','calci','calcd','calcf','calcu','calcint','ecalcid'].forEach(id=>document.getElementById(id).value='');document.querySelectorAll('.fchk').forEach(c=>c.checked=false);}
-function editCalc(id){const c=calcs.find(x=>x.id===id);if(!c)return;ecalcid=id;document.getElementById('calcn').value=c.name;document.getElementById('calci').value=c.icon||'';document.getElementById('calcd').value=c.desc||'';document.getElementById('calcf').value=c.formula;document.getElementById('calcu').value=c.unit||'';document.getElementById('calcint').value=c.interp||'';document.querySelectorAll('.fchk').forEach(cb=>cb.checked=c.fields.includes(cb.value));document.getElementById('ap3').scrollIntoView({behavior:'smooth'});}
-function delCalc(id){if(!confirm('حذف هذه الحاسبة؟'))return;calcs=calcs.filter(x=>x.id!==id);sv();rAcalcl();rCalcs();updStats();toast('🗑️ تم الحذف');}
-function rAcalcl(){const el=document.getElementById('acalcl');if(!calcs.length){el.innerHTML='<div class="empty"><div class="ei">🧮</div><p>لا توجد حاسبات</p></div>';return;}el.innerHTML=calcs.map(c=>`<div class="ai"><div class="aiimg">${c.icon||'🧪'}</div><div class="aiinfo"><div class="ain">${c.name}</div><div class="ais" style="font-family:monospace;font-size:10px;">${c.formula.substring(0,50)}${c.formula.length>50?'...':''}</div></div><div class="aiac"><button class="bico be" onclick="editCalc('${c.id}')">✏️</button><button class="bico bd" onclick="delCalc('${c.id}')">🗑️</button></div></div>`).join('');}
+function resetCalc(){ecalcid=null;['calcn','calci','calcd','calcf','calcu','calcint'].forEach(id=>document.getElementById(id).value='');document.querySelectorAll('.fchk').forEach(c=>c.checked=false);}
+function editCalc(id){const c=calcs.find(x=>x.id===id||x._fsId===id);if(!c)return;ecalcid=c.id||c._fsId;document.getElementById('calcn').value=c.name;document.getElementById('calci').value=c.icon||'';document.getElementById('calcd').value=c.desc||'';document.getElementById('calcf').value=c.formula;document.getElementById('calcu').value=c.unit||'';document.getElementById('calcint').value=c.interp||'';const fArr=Array.isArray(c.fields)?c.fields:c.fields.split(',');document.querySelectorAll('.fchk').forEach(cb=>cb.checked=fArr.includes(cb.value));document.getElementById('ap3').scrollIntoView({behavior:'smooth'});}
+async function delCalc(id){if(!confirm('حذف هذه الحاسبة؟'))return;const docId=calcs.find(x=>x.id===id||x._fsId===id)?._fsId||id;try{await fbDel('calcs',docId);calcs=calcs.filter(x=>x.id!==id&&x._fsId!==id);rAcalcl();rCalcs();updStats();toast('🗑️ تم الحذف');}catch(e){toast('خطأ: '+e.message,true);}}
+function rAcalcl(){const el=document.getElementById('acalcl');if(!calcs.length){el.innerHTML='<div class="empty"><div class="ei">🧮</div><p>لا توجد حاسبات</p></div>';return;}el.innerHTML=calcs.map(c=>`<div class="ai"><div class="aiimg">${c.icon||'🧪'}</div><div class="aiinfo"><div class="ain">${c.name}</div><div class="ais" style="font-family:monospace;font-size:10px;">${c.formula.substring(0,50)}${c.formula.length>50?'...':''}</div></div><div class="aiac"><button class="bico be" onclick="editCalc('${c.id||c._fsId}')">✏️</button><button class="bico bd" onclick="delCalc('${c.id||c._fsId}')">🗑️</button></div></div>`).join('');}
 function rCalcs(){const g=document.getElementById('calcGrid');g.innerHTML='';if(!calcs.length){g.innerHTML='<div class="empty" style="grid-column:1/-1;"><div class="ei">🧮</div><p>سيتم إضافة الحاسبات من لوحة الإدارة</p></div>';return;}
-  calcs.forEach(c=>{const flds=c.fields.map(f=>{const fi=FI[f];if(!fi)return'';if(fi.t==='s')return`<div class="ig"><label>${fi.label}</label><select id="f_${c.id}_${f}">${fi.opts.map(o=>{const[v,l]=o.split(':');return`<option value="${v}">${l}</option>`;}).join('')}</select></div>`;return`<div class="ig"><label>${fi.label}${fi.unit?` (${fi.unit})`:''}</label><input type="number" id="f_${c.id}_${f}" placeholder="0" step="${fi.step||'0.1'}" min="0"></div>`;}).join('');const card=document.createElement('div');card.className='calc-card';card.innerHTML=`<div class="calc-head"><div class="calc-ico">${c.icon||'🧪'}</div><div><div class="calc-n">${c.name}</div><div class="calc-d">${c.desc||''}</div></div></div><div class="cf">${flds}<button class="calc-go" onclick="runCalc('${c.id}')">احسب ▶</button><div class="calc-res" id="cr_${c.id}"><div class="rl">النتيجة</div><div class="rv" id="rv_${c.id}"></div><div class="ri" id="ri_${c.id}"></div></div></div>`;g.appendChild(card);});}
-function runCalc(id){const c=calcs.find(x=>x.id===id);if(!c)return;let vars={};for(const f of c.fields){const el=document.getElementById(`f_${id}_${f}`);if(!el){toast('خطأ في الحقول',true);return;}if(FI[f]?.t==='s'){vars[f]=el.value;}else{const v=parseFloat(el.value);if(isNaN(v)||v<0){toast(`أدخل قيمة صحيحة لـ ${FI[f]?.label||f}`,true);return;}vars[f]=v;}}const{TC,HDL,LDL,TG,glucose,insulin,creatinine,age,gender,urea,weight,height}=vars;let res;try{res=eval(c.formula);}catch(e){toast('خطأ في المعادلة: '+e.message,true);return;}if(typeof res!=='number'||isNaN(res)){toast('نتيجة غير صالحة',true);return;}document.getElementById(`rv_${id}`).textContent=res.toFixed(2)+(c.unit?` ${c.unit}`:'');document.getElementById(`ri_${id}`).textContent=c.interp||'';document.getElementById(`cr_${id}`).className='calc-res show';}
+  calcs.forEach(c=>{const fArr=Array.isArray(c.fields)?c.fields:(typeof c.fields==='string'?c.fields.split(','):[]);const flds=fArr.map(f=>{const fi=FI[f];if(!fi)return'';if(fi.t==='s')return`<div class="ig"><label>${fi.label}</label><select id="f_${c.id||c._fsId}_${f}">${fi.opts.map(o=>{const[v,l]=o.split(':');return`<option value="${v}">${l}</option>`;}).join('')}</select></div>`;return`<div class="ig"><label>${fi.label}${fi.unit?` (${fi.unit})`:''}</label><input type="number" id="f_${c.id||c._fsId}_${f}" placeholder="0" step="${fi.step||'0.1'}" min="0"></div>`;}).join('');const card=document.createElement('div');card.className='calc-card';const cid=c.id||c._fsId;card.innerHTML=`<div class="calc-head"><div class="calc-ico">${c.icon||'🧪'}</div><div><div class="calc-n">${c.name}</div><div class="calc-d">${c.desc||''}</div></div></div><div class="cf">${flds}<button class="calc-go" onclick="runCalc('${cid}')">احسب ▶</button><div class="calc-res" id="cr_${cid}"><div class="rl">النتيجة</div><div class="rv" id="rv_${cid}"></div><div class="ri" id="ri_${cid}"></div></div></div>`;g.appendChild(card);});}
+function runCalc(id){const c=calcs.find(x=>x.id===id||x._fsId===id);if(!c)return;const fArr=Array.isArray(c.fields)?c.fields:(typeof c.fields==='string'?c.fields.split(','):[]);let vars={};for(const f of fArr){const el=document.getElementById(`f_${id}_${f}`);if(!el){toast('خطأ في الحقول',true);return;}if(FI[f]?.t==='s'){vars[f]=el.value;}else{const v=parseFloat(el.value);if(isNaN(v)||v<0){toast(`أدخل قيمة صحيحة لـ ${FI[f]?.label||f}`,true);return;}vars[f]=v;}}const{TC,HDL,LDL,TG,glucose,insulin,creatinine,age,gender,urea,weight,height}=vars;let res;try{res=eval(c.formula);}catch(e){toast('خطأ في المعادلة: '+e.message,true);return;}if(typeof res!=='number'||isNaN(res)){toast('نتيجة غير صالحة',true);return;}document.getElementById(`rv_${id}`).textContent=res.toFixed(2)+(c.unit?` ${c.unit}`:'');document.getElementById(`ri_${id}`).textContent=c.interp||'';document.getElementById(`cr_${id}`).className='calc-res show';}
 
 // ======================== VIDEOS ========================
 let evid=null;
 function ytId(url){const m1=url.match(/youtu\.be\/([^?&]+)/),m2=url.match(/[?&]v=([^&]+)/),m3=url.match(/embed\/([^?&]+)/);if(m1)return m1[1];if(m2)return m2[1];if(m3)return m3[1];return'';}
-function saveVid(){const t=document.getElementById('vt').value.trim(),u=document.getElementById('vu').value.trim();if(!t||!u){toast('العنوان والرابط مطلوبان',true);return;}const id=ytId(u);if(!id){toast('رابط يوتيوب غير صحيح',true);return;}const v={id:evid||Date.now().toString(),title:t,url:u,embed:`https://www.youtube.com/embed/${id}`,desc:document.getElementById('vd').value.trim()};if(evid){const i=videos.findIndex(x=>x.id===evid);if(i>-1)videos[i]=v;toast('✅ تم تعديل الفيديو');}else{videos.push(v);toast('✅ تم إضافة الفيديو');}sv();resetVid();rAvl();rVids();updStats();}
-function resetVid(){evid=null;['vt','vu','vd','evid'].forEach(id=>document.getElementById(id).value='');}
-function editVid(id){const v=videos.find(x=>x.id===id);if(!v)return;evid=id;document.getElementById('vt').value=v.title;document.getElementById('vu').value=v.url;document.getElementById('vd').value=v.desc||'';document.getElementById('ap4').scrollIntoView({behavior:'smooth'});}
-function delVid(id){if(!confirm('حذف هذا الفيديو؟'))return;videos=videos.filter(x=>x.id!==id);sv();rAvl();rVids();updStats();toast('🗑️ تم الحذف');}
-function rAvl(){const el=document.getElementById('avl');if(!videos.length){el.innerHTML='<div class="empty"><div class="ei">🎬</div><p>لا توجد فيديوهات</p></div>';return;}el.innerHTML=videos.map(v=>`<div class="ai"><div class="aiimg">▶️</div><div class="aiinfo"><div class="ain">${v.title}</div><div class="ais" style="font-size:10px;direction:ltr;">${v.url.substring(0,42)}...</div></div><div class="aiac"><button class="bico be" onclick="editVid('${v.id}')">✏️</button><button class="bico bd" onclick="delVid('${v.id}')">🗑️</button></div></div>`).join('');}
+async function saveVid(){const t=document.getElementById('vt').value.trim(),u=document.getElementById('vu').value.trim();if(!t||!u){toast('العنوان والرابط مطلوبان',true);return;}const yid=ytId(u);if(!yid){toast('رابط يوتيوب غير صحيح',true);return;}const btn=document.getElementById('savVidBtn');btn.disabled=true;btn.innerHTML='جاري الحفظ...<span class="loading-spin"></span>';const id=evid||fbId();const v={id,title:t,url:u,embed:`https://www.youtube.com/embed/${yid}`,desc:document.getElementById('vd').value.trim()};try{await fbSet('videos',id,v);if(evid){const i=videos.findIndex(x=>x.id===evid);if(i>-1)videos[i]=v;else videos.push(v);}else{videos.push(v);}toast(evid?'✅ تم تعديل الفيديو':'✅ تم إضافة الفيديو');resetVid();rAvl();rVids();updStats();}catch(e){toast('خطأ: '+e.message,true);}btn.disabled=false;btn.innerHTML='💾 حفظ الفيديو';}
+function resetVid(){evid=null;['vt','vu','vd'].forEach(id=>document.getElementById(id).value='');}
+function editVid(id){const v=videos.find(x=>x.id===id||x._fsId===id);if(!v)return;evid=v.id||v._fsId;document.getElementById('vt').value=v.title;document.getElementById('vu').value=v.url;document.getElementById('vd').value=v.desc||'';document.getElementById('ap4').scrollIntoView({behavior:'smooth'});}
+async function delVid(id){if(!confirm('حذف هذا الفيديو؟'))return;const docId=videos.find(x=>x.id===id||x._fsId===id)?._fsId||id;try{await fbDel('videos',docId);videos=videos.filter(x=>x.id!==id&&x._fsId!==id);rAvl();rVids();updStats();toast('🗑️ تم الحذف');}catch(e){toast('خطأ: '+e.message,true);}}
+function rAvl(){const el=document.getElementById('avl');if(!videos.length){el.innerHTML='<div class="empty"><div class="ei">🎬</div><p>لا توجد فيديوهات</p></div>';return;}el.innerHTML=videos.map(v=>`<div class="ai"><div class="aiimg">▶️</div><div class="aiinfo"><div class="ain">${v.title}</div><div class="ais" style="font-size:10px;direction:ltr;">${v.url.substring(0,42)}...</div></div><div class="aiac"><button class="bico be" onclick="editVid('${v.id||v._fsId}')">✏️</button><button class="bico bd" onclick="delVid('${v.id||v._fsId}')">🗑️</button></div></div>`).join('');}
 function rVids(){const g=document.getElementById('vidsGrid');g.innerHTML='';if(!videos.length){g.innerHTML='<div class="empty" style="grid-column:1/-1;"><div class="ei">🎬</div><p>سيتم إضافة الفيديوهات من لوحة الإدارة</p></div>';return;}videos.forEach(v=>{const card=document.createElement('div');card.className='vid-card';card.innerHTML=`<div class="vid-thumb"><iframe src="${v.embed}" allowfullscreen loading="lazy"></iframe></div><div class="vid-body"><div class="vid-title">${v.title}</div>${v.desc?`<div class="vid-desc">${v.desc}</div>`:''}</div>`;g.appendChild(card);});}
 
-// STATS
+// ======================== STATS ========================
 function updStats(){document.getElementById('st1').textContent=members.length;document.getElementById('st2').textContent=cases.length;document.getElementById('st3').textContent=calcs.length;document.getElementById('st4').textContent=videos.length;}
 
-// INIT
-updStats();rTeam();rCases();rCalcs();rVids();
+// ======================== INIT ========================
+loadAll();
 </script>
 </body>
 </html>
