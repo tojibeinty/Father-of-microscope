@@ -51,7 +51,7 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 /* ===== PAGES ===== */
 .page{display:none;position:relative;z-index:1;padding-top:60px;min-height:100vh;}
 .page.active{display:block;}
-.section-pad{padding:30px 20px 100px;}
+.section-pad{padding:20px 14px 100px;}
 @media(min-width:700px){.section-pad{padding:40px 30px 80px;}}
 .section-header{text-align:center;margin-bottom:40px;}
 .section-tag{display:inline-block;background:rgba(13,126,154,0.12);border:1px solid rgba(13,126,154,0.35);color:var(--teal-light);font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;letter-spacing:2px;margin-bottom:11px;text-transform:uppercase;}
@@ -145,15 +145,42 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .vid-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;}
 .vid-desc{font-size:11px;color:var(--gray);line-height:1.5;}
 
+/* ===== SUBSCRIBE MODAL ===== */
+#subMo .md { max-width: 460px; }
+.sub-body { padding: 28px 24px 24px; }
+.sub-header { text-align: center; margin-bottom: 22px; }
+.sub-icon { font-size: 42px; margin-bottom: 10px; }
+.sub-title { font-family: 'Cinzel', serif; font-size: 16px; color: var(--gold-light); margin-bottom: 4px; }
+.sub-course-name { font-size: 13px; color: var(--gray); }
+.sub-field { margin-bottom: 14px; }
+.sub-field label { display: block; font-size: 11px; color: var(--gray); margin-bottom: 5px; font-weight: 700; letter-spacing: .4px; }
+.sub-field input, .sub-field select { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: var(--white); font-family: 'Tajawal', sans-serif; font-size: 15px; padding: 12px 14px; outline: none; transition: border 0.3s; }
+.sub-field input:focus, .sub-field select:focus { border-color: var(--gold); }
+.sub-field select option { background: var(--navy2); }
+.sub-btn { width: 100%; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border: none; padding: 14px; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px; }
+.sub-btn:active { transform: scale(0.98); }
+.sub-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.enroll-btn { width: 100%; background: linear-gradient(135deg, var(--gold), #8B6914); color: #000; border: none; padding: 12px; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; transition: all 0.3s; margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.enroll-btn:active { transform: scale(0.98); }
+
+/* Mobile improvements */
+@media (max-width: 480px) {
+  .course-title { font-size: 14px; }
+  .course-excerpt { font-size: 12px; }
+  .cmo-title { font-size: 16px !important; }
+  .cmo-desc { font-size: 13px !important; }
+  .sub-body { padding: 22px 18px 20px; }
+}
+
 /* ===== COURSES ===== */
-.courses-grid{display:grid;grid-template-columns:1fr;gap:16px;max-width:1150px;margin:0 auto;}
+.courses-grid{display:grid;grid-template-columns:1fr;gap:14px;max-width:1150px;margin:0 auto;}
 @media(min-width:480px){.courses-grid{grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;}}
 .course-card{background:linear-gradient(145deg,rgba(10,30,53,0.88),rgba(7,21,37,0.95));border:1px solid rgba(201,168,76,0.14);border-radius:18px;overflow:hidden;transition:all 0.3s;cursor:pointer;}
 .course-card:active{transform:scale(0.98);}
 @media(min-width:700px){.course-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,0.38);box-shadow:0 16px 42px rgba(201,168,76,0.08);}}
 
 /* Course image slider */
-.course-slider{position:relative;height:190px;overflow:hidden;background:var(--navy2);}
+.course-slider{position:relative;height:200px;overflow:hidden;background:var(--navy2);}
 .course-slide{position:absolute;inset:0;transition:opacity 0.5s;opacity:0;}
 .course-slide.active{opacity:1;}
 .course-slide img{width:100%;height:100%;object-fit:cover;}
@@ -163,7 +190,7 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,12,24,0.92);b
 .cs-dot.active{background:var(--gold);width:16px;border-radius:3px;}
 .course-img-count{position:absolute;top:9px;left:9px;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);padding:3px 8px;border-radius:14px;font-size:10px;color:var(--white);}
 
-.course-body{padding:16px 18px;}
+.course-body{padding:14px 14px;}
 .course-badge{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--gold-light);font-size:9px;font-weight:700;padding:3px 9px;border-radius:100px;letter-spacing:1px;margin-bottom:9px;text-transform:uppercase;}
 .course-title{font-family:'Cinzel',serif;font-size:15px;color:var(--white);font-weight:700;margin-bottom:7px;line-height:1.4;}
 .course-excerpt{font-size:11px;color:var(--gray);line-height:1.7;margin-bottom:14px;}
@@ -693,6 +720,49 @@ footer span{color:var(--gold-light);}
   <button class="install-close" onclick="document.getElementById('installBanner').classList.remove('show')">✕</button>
 </div>
 
+<!-- SUBSCRIBE MODAL -->
+<div class="mo" id="subMo">
+  <div class="md" style="max-width:460px;">
+    <div class="md-handle"></div>
+    <button class="md-close" onclick="closeMo('subMo')">✕</button>
+    <div class="sub-body">
+      <div class="sub-header">
+        <div class="sub-icon">🎓</div>
+        <div class="sub-title">الاشتراك في الدورة</div>
+        <div class="sub-course-name" id="subCourseName"></div>
+      </div>
+      <div class="sub-field">
+        <label>الاسم الكامل *</label>
+        <input type="text" id="subName" placeholder="أدخل اسمك الكامل">
+      </div>
+      <div class="sub-field">
+        <label>رقم الهاتف *</label>
+        <input type="tel" id="subPhone" placeholder="07XXXXXXXXX" style="direction:ltr;">
+      </div>
+      <div class="sub-field">
+        <label>المرحلة الدراسية</label>
+        <select id="subStage">
+          <option value="">اختر المرحلة</option>
+          <option>المرحلة الأولى</option>
+          <option>المرحلة الثانية</option>
+          <option>المرحلة الثالثة</option>
+          <option>المرحلة الرابعة</option>
+          <option>تخرج</option>
+          <option>خارج الجامعة</option>
+        </select>
+      </div>
+      <div class="sub-field">
+        <label>ملاحظات (اختياري)</label>
+        <input type="text" id="subNote" placeholder="أي استفسار أو ملاحظة...">
+      </div>
+      <button class="sub-btn" id="subSendBtn" onclick="sendSubscription()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        إرسال عبر واتساب
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- SECRET ZONE -->
 <div id="sz" style="position:fixed;bottom:0;left:0;width:55px;height:55px;z-index:500;" onclick="secret()"></div>
 
@@ -901,7 +971,12 @@ function rCourses(){
             ${socH?`<div class="ci-socials">${socH}</div>`:''}
           </div>
         </div>
-        <div class="course-more-btn">عرض الدورة ←</div>
+        <div style="display:flex;gap:8px;margin-top:12px;align-items:center;">
+          <div class="course-more-btn" style="flex:1;">عرض الدورة ←</div>
+          <button onclick="event.stopPropagation();openSubscribe('${cr.id}')" style="background:linear-gradient(135deg,#25D366,#128C7E);color:white;border:none;padding:8px 14px;border-radius:9px;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;">
+            📝 اشتراك
+          </button>
+        </div>
       </div>`;
 
     // Auto-slide if multiple images
@@ -964,6 +1039,17 @@ function openCourse(id){
         ${socH?`<div class="cmo-inst-socs">${socH}</div>`:''}
       </div>
     </div>`;
+  // Add enroll button at bottom of modal
+  setTimeout(() => {
+    const body = document.querySelector('#courseMoContent .cmo-body');
+    if (body && !body.querySelector('.enroll-btn')) {
+      const btn = document.createElement('button');
+      btn.className = 'enroll-btn';
+      btn.innerHTML = '📝 اشترك في الدورة';
+      btn.onclick = () => { closeMo('courseMo'); openSubscribe(id); };
+      body.appendChild(btn);
+    }
+  }, 50);
   document.getElementById('courseMo').classList.add('show');
 }
 
@@ -974,6 +1060,45 @@ function cmoSlide(idx){
   document.getElementById(`cmos_${n}`)?.classList.add('active');
   document.querySelectorAll('.cmo-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
   cmoIdx=n;
+}
+
+// ======================== SUBSCRIBE ========================
+let currentSubCourse = null;
+
+function openSubscribe(id) {
+  const cr = courses.find(x => x.id === id);
+  if (!cr) return;
+  currentSubCourse = cr;
+  document.getElementById('subCourseName').textContent = cr.name;
+  document.getElementById('subName').value = '';
+  document.getElementById('subPhone').value = '';
+  document.getElementById('subStage').value = '';
+  document.getElementById('subNote').value = '';
+  document.getElementById('subMo').classList.add('show');
+}
+
+function sendSubscription() {
+  const name = document.getElementById('subName').value.trim();
+  const phone = document.getElementById('subPhone').value.trim();
+  const stage = document.getElementById('subStage').value;
+  const note = document.getElementById('subNote').value.trim();
+
+  if (!name) { toast('❌ أدخل اسمك الكامل'); return; }
+  if (!phone) { toast('❌ أدخل رقم هاتفك'); return; }
+
+  const courseName = currentSubCourse?.name || '';
+  const text =
+    `📚 *طلب اشتراك - Father of Microscope*\n\n` +
+    `🎓 الدورة: ${courseName}\n` +
+    `👤 الاسم: ${name}\n` +
+    `📞 الهاتف: ${phone}\n` +
+    (stage ? `🎓 المرحلة: ${stage}\n` : '') +
+    (note ? `📝 ملاحظات: ${note}` : '');
+
+  const waText = text.replace(/\*/g, '');
+  window.open(`https://wa.me/9647724651228?text=${encodeURIComponent(waText)}`, '_blank');
+  closeMo('subMo');
+  toast('✅ جاري فتح واتساب...');
 }
 
 // ======================== STATS ========================
